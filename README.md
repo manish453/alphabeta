@@ -1,2 +1,2 @@
-# Aplphabeta solution
+# Alphabeta solution
 
