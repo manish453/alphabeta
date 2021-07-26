@@ -1,0 +1,63 @@
+extends ../_template/_layout
+block content
+	if session.role == "super"
+		include ../common/_sidebar_super
+	else
+		include ../common/_sidebar_admin
+	// sidebar-content
+	.page-content
+		include ../common/_headbar
+		.breadcrumb-wrp.row
+			ul.breadcrumb.mb-0
+				li.breadcrumb-item
+					a(href="/dashboard")
+						i.feather.icon-home
+						| Dashboard
+				li.breadcrumb-item
+					| Media
+		.contentbox
+			.card
+				.card-header
+					h5.card-title Media
+					button(class="btn btn-primary btn-square btn-sm float-right m-0 addRecord triggerModal" data-type="add") Upload Media
+				.card-body.pt-10
+					#pageloadbox.text-center.d-none
+						#loading.text-info
+							span.mx-2.h3.inline-block Loading...
+						#loadfail.text-danger
+					#showbox Image list
+
+		
+		
+		// The Modal
+		#myModal.modal
+			.modal-dialog
+				.modal-content
+					// Modal body
+					.modal-body
+						form#myform(method='post' enctype="multipart/form-data" )
+							.upload-grids
+								.upload-right
+									.upload-file
+										.services-icon
+											span.feather.icon-upload
+										input#uploadfile.form-control.file_input(name='uploadfile', type='file')
+									.upload-info
+										h5 Select files to upload
+										span or
+										p Drag and drop files
+									.col-xs-12
+										.col-xs-12.file_temp_path
+										.clearfix
+										.progress
+											.progress-bar.progress-bar-success.myprogress(role='progressbar', style='width:0%') 0%
+										.clearfix
+										.col-xs-12.path_cont_wrp
+											textarea#file-path.file_name_wrp.col-sm-offset-3(onclick="SelectAll('file-path')")
+											span.options-buttons-area
+												button.options-button.clipboard-button(type='button', data-copytarget='#file-path')
+													| Copy HTML to Clipboard
+block scripts
+	script(src="/jquery.form.min.js")
+	script(src="/js/media.js?ver="+version)
+		

@@ -1,0 +1,7 @@
+include header
+main#main
+	each data in homecontent
+		- let sectionBg = data.sec_background.includes('/') ? "background-image:url("+data.sec_background+")" : "background:"+data.sec_background;
+		section(class=data.section_id id=data.section_id style=sectionBg) !{data.body}
+			
+include footer

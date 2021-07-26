@@ -1,0 +1,32 @@
+extends ../_template/_layout
+block content
+	if session.role == "super"
+		include ../common/_sidebar_super
+	else
+		include ../common/_sidebar_admin
+	// sidebar-content
+	.page-content
+		include ../common/_headbar
+		.breadcrumb-wrp.row
+			ul.breadcrumb.mb-0
+				li.breadcrumb-item
+					a(href="/dashboard")
+						i.feather.icon-home
+						| Dashboard
+				li.breadcrumb-item
+					| Pages
+		.contentbox
+			.card
+				.card-header
+					h5.card-title Pages List
+					a(class="btn btn-primary btn-square btn-sm float-right m-0 addRecord" href="/pages/add") Add Page
+				.card-body.pt-10
+					#pageloadbox.text-center.d-none
+						#loading.text-info
+							span.mx-2.h3.inline-block Loading...
+						#loadfail.text-danger
+					#showbox
+	
+block scripts
+	script(src="/jquery.form.min.js")
+	script(src="/js/pages.js?ver="+version)

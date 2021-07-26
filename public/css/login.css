@@ -1,0 +1,148 @@
+@import '../feather/icon-font.css';
+
+body {
+    font-family: Open Sans, sans-serif;
+    font-size: 14px;
+    color: #111;
+    font-weight: 400;
+    background: url(../images/hero-02.jpg);
+    background-size: cover;
+    position: relative;
+}
+
+.forgetbox {
+    display: none;
+}
+
+.auth-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-width: 100%;
+    min-height: 100vh;
+}
+
+.auth-wrapper .auth-content {
+    width: 390px;
+    padding: 15px;
+    z-index: 5;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.auth-wrapper>div {
+    z-index: 5;
+}
+
+
+.auth-wrapper .card {
+    margin-bottom: 0;
+}
+
+.card {
+    border-radius: 0;
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    box-shadow: none !important;
+}
+
+
+.card .card-block,
+.card .card-body {
+    padding: 30px 25px;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.auth-wrapper .auth-icon {
+    font-size: 30px;
+}
+
+.auth-wrapper .auth-icon:before {
+    background: -webkit-linear-gradient(225deg, #1de9b6, #1dc4e9);
+    background: linear-gradient(-135deg, #E91E63, #FF9800);
+    background-clip: inherit;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.custom-select,
+.form-control {
+    background: #f4f7fa;
+    padding: 8px 15px;
+    font-size: 14px;
+    height: auto;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #038fcf;
+    border-color: #0386c3;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.logo-wrp {margin-bottom: 30px;}
+
+.logo-wrp>img {
+    width: auto;
+}
+.left-box {
+    width: 50%;
+    text-align: center;
+}
+
+.right-box {
+    width: 50%;
+    background: #fff;
+    float: right;
+    height: 100vh;
+    position: relative;
+}
+
+.left-box > img {
+    max-width: 80%;
+    height: auto;
+}
+
+@media (max-width:768px) {
+    .left-box > img {
+        max-width: 300px;
+        height: auto;
+    }
+}
+
+@media (max-width:767px) {
+    .left-box{display:none}
+    .right-box {
+        width: 100%;
+        background: transparent;
+    }
+    .card{
+        width: 300px;
+        margin: 0 auto;
+    }
+    .logo-wrp>img {
+        width: auto;
+    }
+}

@@ -1,0 +1,66 @@
+extends ../_template/_layout
+block styles
+	link(rel="stylesheet" href="/daterangepicker/daterangepicker.css")
+block content
+	if session.role == "super"
+		include ../common/_sidebar_super
+	else
+		include ../common/_sidebar_admin
+	// sidebar-content
+	.page-content
+		include ../common/_headbar
+		.breadcrumb-wrp.row
+			ul.breadcrumb.mb-0
+				li.breadcrumb-item
+					a(href="/dashboard")
+						i.feather.icon-home
+						| Dashboard
+				li.breadcrumb-item
+					| Users
+		.contentbox
+			.card
+				.card-header
+					h5.card-title User List
+					button(class="btn btn-primary btn-square btn-sm float-right m-0 addRecord triggerModal" data-type="add") Add User
+				.card-body.pt-10
+					#pageloadbox.text-center.d-none
+						#loading.text-info
+							span.mx-2.h3.inline-block Loading...
+						#loadfail.text-danger
+					#showbox
+					
+
+		// The Modal
+		#myModal.modal
+			.modal-dialog
+				.modal-content
+					// Modal Header
+					.modal-header
+						h4.modal-title Add User
+					// Modal body
+					.modal-body
+						form(method="post" class="row" id="addEditUserForm" action="/users/save")
+							.col-md-12
+								.form-group
+									input#name.form-control(placeholder='Enter Name' name='name' required='' type='text' value='')
+							.col-md-12
+								.form-group
+									input#email.form-control(placeholder='Enter Email' name='email' required='' type='email' value='' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$")
+							.col-md-12
+								.form-group
+									+createinput({name :"user_id", type :"hidden"})
+									select#role.form-control(name='role' required='')
+										option(value='') Select Role
+										option(value='admin') Admin
+										option(value='super') Super
+							// Modal footer
+							.modal-footer.col-md-12.mt-2
+								button.btn.btn-primary(type='submit') Submit
+								button.btn.btn-danger(type='button' id="closeModal") Close
+						
+
+
+block scripts
+	script(src="/jquery.form.min.js")
+	script(src="/js/autocomplete.js")
+	script(src="/js/users.js?ver="+version)

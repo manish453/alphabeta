@@ -1,0 +1,35 @@
+include ../_mixins/_util
+.table-responsive
+	table#machineTable.table.table-hover
+		thead
+			tr
+				th Title
+				th Section ID
+				th Section background
+				th Order Number
+				th Published Date
+				th Status
+				th Action
+		if tabledata.length > 0
+			tbody
+				each row in tabledata
+					tr
+						td #{row.title}
+						td #{row.section_id}
+						td #{row.sec_background}
+						td #{row.order_number}
+						td 
+							+formatDate(row.get('created_at'))
+						td
+							if(row.status == "1")
+								span.badge.badge-success.p-2.m-1 Active
+							else
+								span.badge.badge-danger.p-2.m-1 Inactive
+
+						td
+							a.btn-square.btn-sm.btn.btn-success.mr-2(href="/homepage/edit/"+row.id) Edit
+							button.btn-square.btn-sm.btn.btn-danger.delete_record(type='button' data-id=row.id) Delete
+		else
+			tr: td(colspan="7" class="text-center") There are no records
+if !nopagination
+	+make_pagination(3, pageinfo)

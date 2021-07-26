@@ -1,0 +1,87 @@
+extends ../_template/_layout
+block content
+	if session.role == "super"
+		include ../common/_sidebar_super
+	else
+		include ../common/_sidebar_admin
+	// sidebar-content
+	.page-content
+		include ../common/_headbar
+		.breadcrumb-wrp.row
+			ul.breadcrumb.mb-0
+				li.breadcrumb-item
+					a(href="/dashboard")
+						i.feather.icon-home
+						| Dashboard
+				li.breadcrumb-item
+					| #{pagetype}
+		.contentbox
+			.card
+				.card-header
+					h5.card-title #{pagetype}
+				.card-body.pt-10
+					- let actiontype = pagetype.toLowerCase().replace(/ +/g, '-');;
+					form(method="post" class="row "+actiontype id="addEditPagesForm" action="/pages/save")
+						.col-md-12
+							.form-group
+								input.form-control(type='text' name='ptitle' id="ptitle" placeholder='Enter page title' value=result.ptitle required)
+						.col-md-12
+							.form-group
+								input.form-control(type='text' name='slug' id="slug" placeholder='Enter slug for page URL' value=result.slug required)
+						.col-md-12
+							.form-group
+								input.form-control(type='text' name='title' id="title" placeholder='Enter Meta title' value=result.title required)
+						.col-md-12
+							.form-group
+								input.form-control(type='text' name='description' id="description" placeholder='Enter Meta Description' value=result.description)
+						.col-md-12
+							.form-group
+								input.form-control(type='text' name='keyword' id="keyword" placeholder='Enter Meta Keyword' value=result.keyword)
+						.col-md-12
+							.form-group
+								label Other Meta
+								textarea.form-control(name="other_meta" id="other_meta" style="height:150px" placeholder="Enter Other meta") #{result.other_meta}
+						.col-md-12
+							.form-group
+								label Page Content
+								textarea.form-control.textarea(name="body" id="body" style="height:0px !important") #{result.body}
+						input(type='hidden' class="input" name='page_id' id="page_id" value=result.page_id)
+
+						//Modal footer
+						.modal-footer.col-md-12
+							button.btn.btn-primary(type='submit') Publish
+							a.btn.btn-danger(href="/pages/") Back	
+block scripts
+	script(src="/jquery.form.min.js")
+	script(src="/tinymce/tinymce.min.js")
+	script(src="/js/pages.js?ver="+version)
+	script.
+			tinymce.init({
+				selector: '.textarea',
+				height: 300,
+				plugins: [
+				'advlist autolink lists link image print preview hr anchor',
+				'searchreplace wordcount visualchars code fullscreen',
+				'media save table contextmenu directionality',
+				'emoticons paste textcolor colorpicker textpattern imagetools'
+				],
+				toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+				toolbar2: 'print preview media | forecolor backcolor emoticons',
+				visualblocks_default_state: true,
+				image_advtab: true,
+				convert_urls: false,
+				relative_urls: false,
+				verify_html: false,
+				extended_valid_elements:'script[language|type|src]',
+				image_class_list:
+				[
+				{title: 'Select Class', value: ''},
+				{title: 'Responsive', value: 'img-responsive'}
+				],
+				table_class_list:
+				[
+				{title: 'Select Class', value: ''},
+				{title: 'Tableizer Heading', value: 'tableizer-table heading-table'},
+				{title: 'Tableizer', value: 'tableizer-table'}
+				],
+				});

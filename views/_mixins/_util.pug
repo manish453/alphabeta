@@ -1,0 +1,61 @@
+mixin formatDate(date,time)
+	- let istime = time || false
+	- var monthStore = ["January","February","March","April","May","June", "July","August","September","October","November","December"];
+	- var d = new Date(date);
+	- month = '' + d.getMonth();
+	- day = '' + d.getDate();
+	- year = d.getFullYear();
+	- if (day.length < 2) day = '0' + day;
+	- var dateval = monthStore[month]+" "+ day+", "+year;
+	if istime
+		- var hour = ''+ d.getHours()
+		- var minutes = ''+ d.getMinutes()
+		- if (hour.length < 2) hour = '0' + hour;
+		- if (minutes.length < 2) minutes = '0' + minutes;
+		- dateval+= " " + hour + ":" + minutes+ " (IST)"
+	span= dateval
+
+mixin make_pagination(display, paging)
+	- var last = paging.total_pages
+	- var active = paging.current_page
+	if last && last>1 && active<=last
+		if (last < display)
+			- display=last;
+		- var next = active+1;
+		- var prev = active-1;
+		- var start = active-1;
+		- if(start==0)
+			- start = 1;
+		nav(aria-label='Page navigation')
+			.pagination#paging
+				ul.pagination
+					- if(prev!=0)
+						li.page-item
+							a(href="#" data-page="1").page-link
+								i.feather.icon-chevrons-left
+						li.page-item
+							a(href="#" data-page=prev).page-link
+								i.feather.icon-chevron-left
+					- for (var index = start; index <= display+start-1 && index<=last; index++)
+						if (index === active)
+							li.active.page-item
+								a(href="#").page-link= index
+						else
+							li.page-item
+								a(href="#" data-page=index).page-link= index
+					- if(next<last)
+						li.page-item
+							a(href="#" title="Next page" data-page=next).page-link
+								i.feather.icon-chevron-right
+						li.page-item
+							a(href="#" title="Next page" data-page=last).page-link
+								i.feather.icon-chevrons-right
+-
+	function create_external_url(url,params){
+		if(params)
+			if( url.indexOf('?'))
+				url=url+"&"+params
+			else
+				url=url+"&"+params
+		return url;
+	}

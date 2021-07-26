@@ -1,0 +1,14 @@
+{
+	"apps": [
+		{
+			"name": "admin",
+			"script": "./admin.js",
+			"cwd": "/web/alphabeta/current"
+		},
+		{
+			"name": "frontend",
+			"script": "./frontend.js",
+			"cwd": "/web/alphabeta/current"
+		}
+	]
+}

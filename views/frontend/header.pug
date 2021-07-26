@@ -1,0 +1,35 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		link(rel="icon" type="image/ico" href="/favicon.ico")
+		meta(content='width=device-width, initial-scale=1.0', name='viewport')
+		title #{data.title}
+		meta(content=data.description, name='descriptison')
+		meta(content=data.keyword, name='keywords')
+		//div !{data.other_meta}
+		// Vendor CSS Files
+		link(href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet")
+		link(href='/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+		link(href='/vendor/font-awesome/css/font-awesome.min.css', rel='stylesheet')
+		link(href='/vendor/ionicons/css/ionicons.min.css', rel='stylesheet')
+		link(href='/vendor/owl.carousel/assets/owl.carousel.min.css', rel='stylesheet')
+		link(href='/vendor/aos/aos.css', rel='stylesheet')
+		// Template Main CSS File
+		link(href='/css/frontend/style.css?ver='+version, rel='stylesheet')
+
+	body(class=pagetype)
+		//- header#header.fixed-top.header-transparent
+		//- 	.container.d-flex.align-items-center
+		//- 		.logo.mr-auto
+		//- 			a(href='/')
+		//- 				img(src='/images/logo-new.png', alt='' class="img-fluid")
+		//- 		nav.main-nav.d-none.d-lg-block
+		//- 			ul.navbar
+		//- 				- let i = 1;
+		//- 				each menu in menus
+		//- 					- let activeClass = (i == 1)? "active" : "";
+		//- 					- let menu_link = pagetype =='innerpage' && (menu.url).indexOf('#') == 0 ? '/'+menu.url : menu.url;
+		//- 					li(class=activeClass)
+		//- 						a(href=menu_link) #{menu.name}
+		//- 					- i++;

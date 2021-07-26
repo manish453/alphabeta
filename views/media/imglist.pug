@@ -1,0 +1,13 @@
+include ../_mixins/_util
+		if tabledata.length > 0
+			ul#img_list
+				each row in tabledata
+					li(data-id=row.img_id class="img-item") 
+						img(src='/thumbnails'+row.thumb)
+						.media_btn_wrp
+							.copylink( data-image-url=row.image) copy path
+							.delete_media(data-id=row.img_id) Delete 
+		else
+			p There are no image uploaded.
+if !nopagination
+	+make_pagination(3, pageinfo)

@@ -1,0 +1,62 @@
+extends ../_template/_layout
+block content
+	if session.role == "super"
+		include ../common/_sidebar_super
+	else
+		include ../common/_sidebar_admin
+	// sidebar-content
+	.page-content
+		include ../common/_headbar
+		.breadcrumb-wrp.row
+			ul.breadcrumb.mb-0
+				li.breadcrumb-item
+					a(href="/dashboard")
+						i.feather.icon-home
+						| Dashboard
+				li.breadcrumb-item
+					| Home Page
+		.contentbox
+			.card
+				.card-header
+					h5.card-title Home page sections
+					a(class="btn btn-primary btn-square btn-sm float-right m-0 addRecord" href="/homepage/add") Add Section
+				.card-body.pt-10
+					#pageloadbox.text-center.d-none
+						#loading.text-info
+							span.mx-2.h3.inline-block Loading...
+						#loadfail.text-danger
+					#showbox
+		// The Modal
+		#myModal.modal
+			.modal-dialog
+				.modal-content
+					// Modal Header
+					.modal-header
+						h4.modal-title Add Machine
+					// Modal body
+					.modal-body
+						form(method="post" class="row" id="addEditMenusForm" action="/menus/save")
+							.col-md-12
+								.form-group
+									input#name.form-control.input(placeholder='Enter menu name' name='name' type='text' required)
+							.col-md-12
+								.form-group
+									input#url.form-control.input(placeholder='Enter menu URL' name='url' type='text' required)
+							.col-md-12
+								.form-group
+									input#order_number.form-control.input(placeholder='Enter menu order' name='order_number' type='text' required)
+							.col-md-12
+								.form-group
+									select.form-control.input(name='status' id="status")
+										option(value='') Select Status
+										option(value='1') Active
+										option(value='0') Inactive
+							input(type='hidden' class="input" name='menu_id' id="menu_id" value="")
+
+							//Modal footer
+							.modal-footer.col-md-12
+								button.btn.btn-primary(type='submit') Submit
+								button.btn.btn-danger(type='button' id="closeModal") Close	
+block scripts
+	script(src="/jquery.form.min.js")
+	script(src="/js/home-page.js?ver="+version)

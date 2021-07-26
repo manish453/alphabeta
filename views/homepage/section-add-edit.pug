@@ -1,0 +1,82 @@
+extends ../_template/_layout
+block content
+	if session.role == "super"
+		include ../common/_sidebar_super
+	else
+		include ../common/_sidebar_admin
+	// sidebar-content
+	.page-content
+		include ../common/_headbar
+		.breadcrumb-wrp.row
+			ul.breadcrumb.mb-0
+				li.breadcrumb-item
+					a(href="/dashboard")
+						i.feather.icon-home
+						| Dashboard
+				li.breadcrumb-item
+					| #{pagetype}
+		.contentbox
+			.card
+				.card-header
+					h5.card-title #{pagetype}
+				.card-body.pt-10
+					- let actiontype = pagetype.toLowerCase().replace(/ +/g, '-');;
+					form(method="post" class="row "+actiontype id="addEditSectionForm" action="/homepage/save")
+						.col-md-12
+							.form-group
+								input.form-control(type='text' name='title' id="title" placeholder='Enter section title' value=result.title required)
+						.col-md-12
+							.form-group
+								input.form-control(type='text' name='section_id' id="section_id" placeholder='Enter section id' value=result.section_id required)
+						.col-md-12
+							.form-group
+								label Section Content
+								textarea.form-control.textarea(name="body" id="body" style="height:0px !important") #{result.body}
+						.col-md-12
+							.form-group
+								input.form-control(type='text' name='sec_background' id="sec_background" placeholder='Enter section background' value=result.sec_background)
+
+						.col-md-12
+								.form-group
+									input#order_number.form-control.input(placeholder='Enter section order' name='order_number' type='text'  value=result.order_number required)
+						input(type='hidden' class="input" name='id' id="id" value=result.id)
+
+						//Modal footer
+						.modal-footer.col-md-12
+							button.btn.btn-primary(type='submit') Publish
+							a.btn.btn-danger(href="/homepage/") Back	
+block scripts
+	script(src="/jquery.form.min.js")
+	script(src="/tinymce/tinymce.min.js")
+	script(src="/js/home-page.js?ver="+version)
+	script.
+			tinymce.init({
+				selector: '.textarea',
+				height: 300,
+				plugins: [
+				'advlist autolink lists link image print preview hr anchor',
+				'searchreplace wordcount visualchars code fullscreen',
+				'media save table contextmenu directionality',
+				'emoticons paste textcolor colorpicker textpattern imagetools'
+				],
+				toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+				toolbar2: 'print preview media | forecolor backcolor emoticons',
+				visualblocks_default_state: true,
+				content_css: "/css/frontend/style.css",
+				image_advtab: true,
+				convert_urls: false,
+				relative_urls: false,
+				verify_html: false,
+				extended_valid_elements:'script[language|type|src]',
+				image_class_list:
+				[
+				{title: 'Select Class', value: ''},
+				{title: 'Responsive', value: 'img-responsive'}
+				],
+				table_class_list:
+				[
+				{title: 'Select Class', value: ''},
+				{title: 'Tableizer Heading', value: 'tableizer-table heading-table'},
+				{title: 'Tableizer', value: 'tableizer-table'}
+				],
+				});

@@ -1,0 +1,45 @@
+{
+	"name": "goalphabeta",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"scripts": {
+		"start": "node admin.js && node frontend.js",
+		"panel": "node admin.js",
+		"frontend": "node frontend.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:manish453/alphabeta.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^0.19.2",
+		"bluebird": "^3.7.1",
+		"body-parser": "^1.19.0",
+		"compression": "^1.7.4",
+		"connect-redis": "^3.4.2",
+		"dotenv-safe": "^8.2.0",
+		"express": "^4.17.1",
+		"express-session": "^1.17.0",
+		"image-size": "^0.8.3",
+		"md5": "^2.2.1",
+		"multer": "^1.4.2",
+		"mysql2": "^1.7.0",
+		"nodemailer": "6.4.2",
+		"pbkdf2": "^3.0.17",
+		"performance-now": "^2.1.0",
+		"pm2": "^4.4.0",
+		"pug": "^2.0.4",
+		"randomstring": "^1.1.5",
+		"redis": "^2.8.0",
+		"request": "^2.88.2",
+		"request-promise": "^4.2.5",
+		"sequelize": "5.21.3",
+		"sequelize-cli": "^5.5.1",
+		"sharp": "^0.25.4"
+	}
+}

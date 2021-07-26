@@ -1,0 +1,55 @@
+extends ../_template/_layout
+block styles
+	style.
+		.clipboard-button{position:relative;cursor:pointer;background: #4CAF50;color: #fff;border: 1px solid #4CAF50;padding: 5px 10px;}.copied::after{position:absolute;top:0;right:110%;display:block;content:"Copied!";font-size:1em;padding:.3em .6em;color:#fff;background-color:#88D14F;opacity:0;will-change:opacity,transform;-webkit-animation:showcopied 1.5s ease;animation:showcopied 1.5s ease}@-webkit-keyframes showcopied{0%{opacity:0;-webkit-transform:translateX(100%);transform:translateX(100%)}70%{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}100%{opacity:0}}@keyframes showcopied{0%{opacity:0;-webkit-transform:translateX(100%);transform:translateX(100%)}70%{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}100%{opacity:0}}
+		.progress{background-color:#f8f8f8;border-radius:5px;margin-top:15px;display:none}.upload{padding:8em 0;background:#F3F3F3}.upload-right{padding:10em 0;background:#FFF;position:relative}.upload-file input[type="file"]{opacity:0;width:60%;height:260px;display:inline-block;border:0;outline:none;position:absolute;left:20%;top:20%;cursor:pointer;border-radius:5%;-webkit-border-radius:5%;-ms-border-radius:5%;-moz-border-radius:5%;-o-border-radius:5%}.services-icon{background:#007bff;width:75px;height:75px;line-height:6em;text-align:center;position:relative;margin:0 auto;border-radius:5%;-webkit-border-radius:5%;-ms-border-radius:5%;-moz-border-radius:5%;-o-border-radius:5%}.icon-upload{font-size:3em;color:#FFF}.upload-info{text-align:center;margin:3em 0 0}.upload-info h5{color:#000;font-size:20px;font-weight:600;margin:0}.upload-info span{font-size:14px;color:#9E9E9E}.upload-info p{font-size:14px;color:#757575;margin:0}
+		.file_name_wrp {width:calc(100% - 200px);float: left;height: 36px;line-height: 26px;padding-left: 5px;resize: none;}
+		.path_cont_wrp{margin-top: 20px;display:none}
+block content
+	if session.role == "super"
+		include ../common/_sidebar_super
+	else
+		include ../common/_sidebar_admin
+	// sidebar-content
+	.page-content
+		include ../common/_headbar
+		.breadcrumb-wrp.row
+			ul.breadcrumb.mb-0
+				li.breadcrumb-item
+					a(href="/dashboard")
+						i.feather.icon-home
+						| Dashboard
+				li.breadcrumb-item
+					| Media
+		.contentbox
+			.card
+				.card-body.pt-10
+					form#myform(method='post' enctype="multipart/form-data" )
+						.upload-grids
+							.upload-right
+								.upload-file
+									.services-icon
+										span.feather.icon-upload
+									input#uploadfile.form-control.file_input(name='uploadfile', type='file')
+								.upload-info
+									h5 Select files to upload
+									span or
+									p Drag and drop files
+								.col-xs-12
+									.col-xs-12.file_temp_path
+									.clearfix
+									.progress
+										.progress-bar.progress-bar-success.myprogress(role='progressbar', style='width:0%') 0%
+									.clearfix
+									.col-xs-12.path_cont_wrp
+										textarea#file-path.file_name_wrp.col-sm-offset-3(onclick="SelectAll('file-path')")
+										span.options-buttons-area
+											button.options-button.clipboard-button(type='button', data-copytarget='#file-path')
+												| Copy HTML to Clipboard
+					
+
+	
+block scripts
+	script(src="/jquery.form.min.js")
+	script(src="/js/media.js?ver="+version)
+		

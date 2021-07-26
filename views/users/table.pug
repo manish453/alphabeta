@@ -1,0 +1,23 @@
+include ../_mixins/_util
+.table-responsive
+	table#usersTable.table.table-hover
+		thead
+			tr
+				th Name
+				th Email
+				th Role
+				th Action
+		if tabledata.length > 0
+			tbody
+				each row in tabledata
+					tr
+						td #{row.name}
+						td #{row.email}
+						td.text-capitalize #{row.role}
+						td
+							button(type='button' class="btn btn-square btn-sm btn-success mr-2 triggerModal" data-type="edit" data-id=row.user_id) Edit
+							button.btn-square.btn-sm.btn.btn-danger.delete_record(type='button' data-id=row.user_id) Delete
+		else
+			tr: td(colspan="5" class="text-center") There are no records
+if !nopagination
+	+make_pagination(3, pageinfo)

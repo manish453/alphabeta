@@ -1,0 +1,41 @@
+extends _template/_layout
+
+block styles
+	link(rel="stylesheet", href="/css/login.css?ver="+version)
+
+block content
+	.auth-wrapper
+		.left-box
+
+		.right-box
+			.auth-content
+				.logo-wrp.text-center
+					a.logo-wrp(href="http://alphabetasolution.com/")
+						img(src='/images/logo-new.png')
+				.card
+					.card-body.text-center
+						form(action='/' method="post" id="loginform" autocomplete="off").loginbox
+							.mb-4
+								i.feather.icon-unlock.auth-icon
+							h3.mb-4 Login
+							.input-group.mb-3
+								input.form-control(name="email" type='email' placeholder='Email')
+							.input-group.mb-3
+								input.form-control(name="password" type='password' placeholder='password')
+							button#loginsubmit.btn.btn-primary.btn-block.shadow-2.mb-4(type='submit') Login
+							p.mb-2.text-muted#showforget(style="cursor:pointer") Forgot password?					
+						.forgetbox
+							.mb-2
+								i.feather.icon-lock.auth-icon
+							h5.mb-4.form-title Forgot Password
+							form(action='/forget' id="forgetform" method="post")
+								+createinput({name:"registerEmail",type:"email",required:true,placeholder:"Enter email"})
+								.row
+									.col-6.pr-1
+										button#forgetsubmit.btn.btn-primary.btn-block.mx-auto(type='submit') Send Email
+									.col-6.pl-1
+										button#closeforget.btn.btn-pill.btn-danger.btn-block.mx-auto(type='button') Back
+
+block scripts
+	script(src="/jquery.form.min.js")
+	script(src="/js/user-manage.js?ver="+version)

@@ -1,0 +1,74 @@
+extends ../_template/_layout
+block styles
+	link(rel="stylesheet" href="/daterangepicker/daterangepicker.css")
+block content
+	if session.role == "super"
+		include ../common/_sidebar_super
+	else
+		include ../common/_sidebar_admin
+	// sidebar-content
+	.page-content
+		include ../common/_headbar
+		.breadcrumb-wrp.row
+			ul.breadcrumb.mb-0
+				li.breadcrumb-item
+					a(href="/dashboard")
+						i.feather.icon-home
+						| Dashboard
+				li.breadcrumb-item
+					a(href="/users") Users
+				li.breadcrumb-item
+					| Profile
+		.contentbox
+			.card
+				.card-body
+					.card-title.mb-4
+					.d-flex.justify-content-start
+						.image-container
+							img#imgProfile.img-thumbnail(src='/images/avtar.png' style='width: 100px; height: 100px')
+						.userData.ml-3
+							h2.d-block(style='font-size: 1.5rem; font-weight: bold')
+								a(href='javascript:void(0);') #{user.name}
+							h6.d-block
+								a(href="javascript:void(0)") #{user.email}
+						
+					.row.mt-4
+						.col-12
+							ul#myTab.nav.nav-tabs.mb-4(role='tablist')
+								li.nav-item
+									a#basicInfo-tab.nav-link.active(data-toggle='tab' href='#basicInfo' role='tab' aria-controls='basicInfo' aria-selected='true') Basic Info
+								li.nav-item
+									a#change-password.nav-link(data-toggle='tab' href='#changePasswordForm' role='tab' aria-controls='changePasswordForm' aria-selected='false') Change Password
+							#myTabContent.tab-content.ml-1
+								#basicInfo.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='basicInfo-tab')
+									table.table.table-borderd.profile-table
+										tbody
+											tr
+												th Name
+												td #{user.name}
+											tr
+												th Email
+												td #{user.email}
+											tr
+												th Role
+												td #{user.role}
+									
+								#changePasswordForm.tab-pane.fade(role='tabpanel' aria-labelledby='change-password')
+									form(action='/profile/updatepassword' method="post" class="row" id="updatePassword")
+										.col-md-5.col-sm-12
+											.row
+												.col-md-12
+													.form-group
+														input.form-control(name="password" type='password' id='password' placeholder='Enter new password')
+												.col-md-12
+													.form-group.mb-3
+														input.form-control(name="confirPass" id="confirPass" type='password' placeholder='confir Password')
+												.col-md-12
+													button.btn.btn-primary.btn-block.shadow-2.mb-4(type='submit') Update
+
+
+
+block scripts
+	script(src="/jquery.form.min.js")
+	script(src="/js/autocomplete.js")
+	script(src="/js/profile.js?ver="+version)

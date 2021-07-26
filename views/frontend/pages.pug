@@ -1,0 +1,15 @@
+include header
+main#main
+	section#breadcrumbs.breadcrumbs
+		.container
+			ol
+				li
+					a(href='/') Home
+				li #{data.ptitle}
+			h2 #{data.ptitle}
+		// End Breadcrumbs
+	section.inner-page.pt-4
+		.container !{data.body}
+
+		
+include footer

@@ -1,0 +1,31 @@
+
+header.container-fluid.loggedinpanel-head.p-0
+	.mob-logo
+		a.navbar-brand(href='/') 
+			img(src='/images/logo.png')
+	.nav-left
+		ul.navbar
+			li
+				a(href="javascript:void(0)" class="mobile-menu" id="mobile-collapse")
+					span
+			li#screenfullview
+				i.feather.icon-maximize
+	.nav-right.float-right
+		ul.navbar
+			li.avtar
+				img(src='/images/avtar.png' alt="")
+			li.dropdown
+				a.nav-link.prof-nav.dropdown-toggle.pl-1.pr-1(data-toggle="dropdown" href='#')
+					| #{session.name}
+					| &nbsp;
+					span.caret
+				ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="dropdownMenu1")
+					- if (session.type == "panel")
+						li(class="nav-item")
+							a.nav-link.pl-0(role="menuitem" tabindex="-1" href="/profile" )
+								i.feather.icon-user
+								|&nbsp; Profile
+					li#closeSession(class="nav-item")
+						a.nav-link.logout(role="menuitem" tabindex="-1" href="#" )
+							i.feather.icon-log-out
+							|&nbsp; Logout

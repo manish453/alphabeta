@@ -1,0 +1,34 @@
+doctype html
+html(lang='en')
+	head
+		title 404
+		link(rel="icon" type="image/ico" href="/favicon.ico")
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		meta(name="description" content="")
+		meta(name="keyword" content="")
+		link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet', integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+		link(href='/css/frontend/style.css?ver='+version, rel='stylesheet', type='text/css', media='all')
+		link(href='/css/frontend/custom.css?ver='+version, rel='stylesheet', type='text/css', media='all')
+		link(href='/css/frontend/font-awesome.css', rel='stylesheet')
+		link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700', rel='stylesheet')
+		
+	body
+		// header
+		include header
+		.clearfix
+		// Page Content
+		section.content-panel.mt-5.error-page
+			.container
+				.row
+					.col-md-12.text-center
+						.error-template
+							h1 Oops!
+							h2 404 Not Found
+							.error-details Sorry, an error has occured, Requested page not found!
+							.error-actions
+							a.btn.btn-primary.btn-lg(href='/')
+								span.feather.icon-home
+								| Take Me Home
+
+		include footer

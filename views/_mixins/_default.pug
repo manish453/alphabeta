@@ -1,0 +1,99 @@
+mixin createNav(json)
+	if !json.child && !json.discard
+		li(class="nav-item")
+			a.nav-link(href='/' + json.url)
+				|#{json.text}
+	else if json.child && !json.discard
+		li.nav-item.dropdown
+			a.nav-link.dropdown-toggle(data-toggle="dropdown" href='#')
+				= json.text
+				| &nbsp;
+				span.caret
+			ul.dropdown-menu(role="menu" aria-labelledby="dropdownMenu1")
+				for item in json.child
+					if !item.discard
+						li(role="presentation" class="nav-item")
+							a.nav-link(role="menuitem" tabindex="-1" href="/" + item.url)= item.text
+
+//- InputtBox options
+//- option = {name:"name", id:"id", class:{form:"row",label:"col-sm-2",div:"col-sm-10",input:"input-class"}, value:value, label:"Label",  placeholder:"Enter this", required:true,type:password/hidden/text/file/textbox }
+mixin createinput(options)
+	if options.name
+		- let inpname = options.name
+		- let id = options.id ? options.id : inpname
+		if options.type=="hidden"
+			input(type="hidden" name=inpname value=options.value id=id)&attributes(options.attributes)
+		else
+			- let inptype = options.type ? options.type : "text"
+			- let formclass = "", divclass = "inputbox", labelclass = "", inpclass =""
+			if options.class
+				- formclass = options.class.form ? options.class.form :""
+				- divclass = options.class.div ? options.class.div : "inputbox"
+				- labelclass = options.class.label ? options.class.label : ""
+				- inpclass = options.class.input ? options.class.input : ""
+			div(class="form-group "+ formclass)
+				if options.label
+					label(class="col-form-label "+labelclass for=options.id) #{options.label}
+				div(class=divclass)
+					if options.type == "file"
+						input(type="file" id=id class=inpclass name=inpname required=options.required accept=options.accept)&attributes(options.attributes)
+					else if options.type == "textarea"
+						textarea(id=id class="form-control "+inpclass name=inpname value=options.value required=options.required placeholder=options.placeholder )&attributes(options.attributes)
+					else
+						input(type=options.type id=id class="form-control "+inpclass name=inpname value=options.value required=options.required placeholder=options.placeholder)&attributes(options.attributes)
+					if options.help
+						small.form-text.text-muted #{options.help}
+
+//- SelectBox options
+//- option = {name:"name", id:"id", class:{form:"row",label:"col-sm-2",div:"col-sm-10",select:"select2"}, selectedvalue:selectedvalue, label:"Label", default:true, placeholder:"Select", required:true,selectlist:[]/{},type:multiple }
+mixin selectbox(options)
+	if options.name
+		- let selname = options.name
+		- let id = options.id!=undefined ? options.id : selname
+		- let required = options.required ? true : false
+		- let thisvalue = options.selectedvalue ? options.selectedvalue : ""
+		- let formclass = "", divclass = "selectbox", labelclass = "", selclass ="" , formcontrol = true, formid=""
+		- let seltype = options.type ? options.type : false
+		if options.formcontrol
+			- formcontrol = options.formcontrol == "no" ? false : true
+		if options.class
+			- formclass = options.class.form ? options.class.form :""
+			- divclass = options.class.div ? options.class.div : "selectbox"
+			- labelclass = options.class.label ? options.class.label : ""
+			- selclass = options.class.select ? options.class.select : ""
+		if formcontrol == true
+			- selclass = "form-control "+selclass
+		if options.ids
+			-formid = options.ids.form ?  options.ids.form : ""
+		div(class="form-group " +formclass, id=formid)
+			if options.label
+				label(class="col-form-label "+labelclass) #{options.label}
+			div(class=divclass)
+				select(id=id multiple=seltype class=selclass name=selname, required=required)&attributes(options.attributes)
+					if options.default==true
+						option(value="")= options.placeholder
+					if options.selectlist
+						each value in options.selectlist
+							if value.constructor == Object
+								+check_is_selected(value.id,value.text,thisvalue,seltype)
+							else
+								- let val = value.toLowerCase()
+								+check_is_selected(val,value,thisvalue,seltype)
+						else
+							if thisvalue
+								+check_is_selected(thisvalue,thisvalue,thisvalue,"")
+	else
+		p Please Provide the name for this select
+
+mixin check_is_selected(val,text,thisvalue,type)
+	- let selected = false
+	if typeof text =="string" && text.indexOf("_") > 0
+		- text = text.replace(/_/g," ")
+	if thisvalue
+		if type == "multiple"
+			- selected = thisvalue.includes(val) ? "selected" : false
+		else 
+			- selected = thisvalue == val ? "selected" : false
+		option(value=val, selected=selected)= text
+	else
+		option(value=val)= text

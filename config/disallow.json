@@ -1,0 +1,10 @@
+{
+	"admin": [
+		"/users",
+		"/centers",
+		"/notifiers",
+		"/pages",
+		"/menus",
+		"/media"
+	]
+}

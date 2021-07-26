@@ -1,0 +1,22 @@
+extends ../_template/_layout
+block content
+	if session.role == "super"
+		include ../common/_sidebar_super
+	else
+		include ../common/_sidebar_admin
+	// sidebar-content
+	.page-content
+		include ../common/_headbar
+		.breadcrumb-wrp.row
+			ul.breadcrumb.mb-0
+				li.breadcrumb-item
+					a(nohref="/")
+						i.feather.icon-home
+						| Dashboard
+
+		.contentbox
+			.card
+				.card-body.pt-10
+					span Welcome To Alpha Beta Solution
+
+block scripts

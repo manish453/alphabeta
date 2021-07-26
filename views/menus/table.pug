@@ -1,0 +1,30 @@
+include ../_mixins/_util
+.table-responsive
+	table#machineTable.table.table-hover
+		thead
+			tr
+				th Order Number
+				th Name
+				th URL
+				th Status
+				th Action
+		if tabledata.length > 0
+			tbody
+				each row in tabledata
+					tr
+						td #{row.order_number}
+						td #{row.name}
+						td #{row.url}
+						td
+							if(row.status == "1")
+								span.badge.badge-success.p-2.m-1 Active
+							else
+								span.badge.badge-danger.p-2.m-1 Inactive
+
+						td
+							button.btn-square.btn-sm.btn.btn-success.mr-2.triggerModal(type='button' data-toggle="modal" data-target="#myModal" data-type="edit" data-id=row.menu_id) Edit
+							button.btn-square.btn-sm.btn.btn-danger.delete_record(type='button' data-id=row.menu_id) Delete
+		else
+			tr: td(colspan="7" class="text-center") There are no records
+if !nopagination
+	+make_pagination(3, pageinfo)

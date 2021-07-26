@@ -1,0 +1,25 @@
+doctype html
+html(lang='en')
+	head
+		title Alpha Beta solutions
+		link(rel="icon" type="image/ico" href="/favicon.ico")
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet' href='/bootstrap/css/bootstrap.min.css')
+		link(rel='stylesheet' href='/feather/icon-font.css')
+		link(rel='stylesheet' href='/css/main.css?ver='+version)
+		link(rel='stylesheet' href='/css/custom.css?ver='+version)
+
+		block styles
+	body.internal.loggedinpanel
+		include ../_mixins/_default
+		.page-wrapper.chiller-theme.toggled
+			block content
+		
+		script(src="/jquery/jquery-3.3.1.min.js")
+		script(src="/popper/dist/umd/popper.min.js")
+		script(src="/bootstrap/js/bootstrap.min.js")
+		script(src="/sweetalert.min.js")
+		script(src="/js/style.js")
+
+		block scripts
